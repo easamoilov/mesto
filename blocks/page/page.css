@@ -1,3 +1,5 @@
+@import url("./__container/page__container.css");
+
 .page {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -12,16 +14,7 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 
-  --main-max-width: calc(882px + 20px + 20px);
-  --main-padding-left: 20px;
-  --main-padding-right: 20px;
-}
-
-.page__container {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  max-width: var(--main-max-width);
-  width: 100%;
-  margin: 0 auto;
+  --main-margin-left: 20px;
+  --main-margin-right: 20px;
+  --main-max-width: calc(882px + var(--main-margin-left) + var(--main-margin-right));
 }

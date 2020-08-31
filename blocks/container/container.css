@@ -2,18 +2,13 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding-left: var(--main-padding-left);
-  padding-right: var(--main-padding-right);
-}
-
-.container_wide {
-  padding-left: var(--main-padding-left);
-  padding-right: var(--main-padding-right);
+  margin-left: var(--main-margin-left);
+  margin-right: var(--main-margin-right);
 }
 
 @media screen and (max-width: 425px) {
   .container_wide {
-    padding-left: 0;
-    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
