@@ -1,0 +1,15 @@
+.profile__description {
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: normal;
+  margin: 0;
+  grid-column: 1 / span 2;
+}
+
+
+@media screen and (max-width: 600px) {
+  .profile__description {
+    font-size: calc((100vw - 320px) * (18 - 14) / (600 - 320) + 14px);
+    justify-self: center;
+  }
+}
