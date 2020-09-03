@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   max-width: var(--main-max-width);
+  min-width: var(--main-min-width);
   width: 100%;
   margin: 0 auto;
   padding: 45px 0 60px;
