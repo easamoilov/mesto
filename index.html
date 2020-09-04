@@ -18,10 +18,10 @@
         <div class="profile__avatar"></div>
         <div class="profile__info">
           <h1 class="profile__title page__text">Жак-Ив Кусто</h1>
-          <button class="profile__button profile__button_type_edit"></button>
+          <button class="profile__button-edit icon-button"></button>
           <p class="profile__description page__text">Исследователь океана</p>
         </div>
-        <button class="profile__button profile__button_type_add">add</button>
+        <button class="profile__button-add icon-button">add</button>
       </section>
       <div class="elements page__elements">
         <div class="element">
@@ -65,6 +65,18 @@
             <h2 class="element__title page__text">Карачаево-Ч...</h2>
             <button class="element__btn-like">
           </div>
+        </div>
+      </div>
+
+      <div class="popup">
+        <div class="popup__content">
+          <button class="popup__button-close icon-button"></button>
+          <form class="edit-form" action="#">
+            <h2 class="edit-form__title">Редактировать профиль</h2>
+            <input type="text" class="edit-form__text edit-form__text_type_name" value="Жак-Ив Кусто">
+            <input type="text" class="edit-form__text edit-form__text_type_description" value="Исследователь океана">
+            <input type="submit" value="Сохранить" class="edit-form__button-save">
+          </form>
         </div>
       </div>
     </main>

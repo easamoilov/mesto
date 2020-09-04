@@ -1,0 +1,21 @@
+.edit-form__button-save {
+  margin-top: 48px;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  font-weight: normal;
+  background-color: #000;
+  border-radius: 2px;
+  border: 0;
+  transition: opacity .3 ease;
+  height: 50px;
+}
+
+.edit-form__button-save:focus {
+  outline: none;
+}
+
+.edit-form__button-save:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
