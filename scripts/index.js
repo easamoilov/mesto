@@ -1,49 +1,75 @@
-const pageObjects = {
+const popupManager = {
   page: document.querySelector(".page"),
   popup: document.querySelector(".popup"),
-  editButton: document.querySelector(".profile__button-edit"),
-  addButton: document.querySelector(".profile__button-add"),
-  closePopupButton: document.querySelector(".popup__button-close"),
-  profileTitle: document.querySelector(".profile__title"),
-  profileDescription: document.querySelector(".profile__description"),
-  test: 'test',
+  closeButton: document.querySelector(".popup__button-close"),
 
   openPopup: function openPopup() {
-    this.popup.classList.remove("popup_closed");
+    if (!this.popup.classList.contains("popup_opened")) {
+      !this.popup.classList.add("popup_opened");
+    }
     if (!this.page.classList.contains("page_overflow-hidden")) {
       !this.page.classList.add("page_overflow-hidden");
     }
   },
 
   closePopup: function closePopup() {
-    if (!this.popup.classList.contains("popup_closed")) {
-      this.popup.classList.add("popup_closed");
-    }
+    this.popup.classList.remove("popup_opened");
     this.page.classList.remove("page_overflow-hidden");
   },
+}
 
+const profileManager = {
+  editButton: document.querySelector(".profile__button-edit"),
+  addButton: document.querySelector(".profile__button-add"),
+  profileName: document.querySelector(".profile__name"),
+  profileJob: document.querySelector(".profile__job"),
 
-};
+  getName: function getName() {
+    return this.profileName.textContent;
+  },
 
-const editFormObjects = {
-  nameText: document.querySelector(".edit-form__text_type_name"),
-  descriptionText: document.querySelector(".edit-form__text_type_description"),
-  saveButton: document.querySelector(".edit-form__button-save"),
+  getJob: function getJob() {
+    return this.profileJob.textContent;
+  },
 
-  loadFromPage: function loadFromPage() {
-    this.nameText.value = pageObjects.profileTitle.textContent;
-    this.descriptionText.value = pageObjects.profileDescription.textContent;
+  save: function (name, job) {
+    this.profileName.textContent = name;
+    this.profileJob.textContent = job;
   }
 }
 
-function edit() {
-  editFormObjects.loadFromPage();
-  pageObjects.openPopup();
+const profileFormManager = {
+  form: document.querySelector(".edit-form"),
+  nameInput: document.querySelector(".edit-form__input_type_name"),
+  jobInput: document.querySelector(".edit-form__input_type_job"),
+
+  setFields: function setFields(name, job) {
+    this.nameInput.value = name;
+    this.jobInput.value = job;
+  },
+  getName: function getName() {
+    return this.nameInput.value;
+  },
+  getJob: function getName() {
+    return this.jobInput.value
+  }
 }
 
-pageObjects.editButton.addEventListener('click', edit);
-pageObjects.closePopupButton.addEventListener('click', () => {
-  pageObjects.closePopup()
-});
+function initSubscriptions() {
+  profileManager.editButton.addEventListener('click', () => {
+    profileFormManager.setFields(profileManager.getName(), profileManager.getJob());
+    popupManager.openPopup();
+  });
 
-console.log(pageObjects.page);
+  popupManager.closeButton.addEventListener('click', () => {
+    popupManager.closePopup();
+  });
+
+  profileFormManager.form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    profileManager.save(profileFormManager.getName(), profileFormManager.getJob());
+    popupManager.closePopup();
+  });
+}
+
+initSubscriptions();

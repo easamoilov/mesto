@@ -1,4 +1,4 @@
-.edit-form__button-save {
+.edit-form__submit {
   margin-top: 48px;
   font-size: 18px;
   line-height: 1.2;
@@ -11,11 +11,11 @@
   height: 50px;
 }
 
-.edit-form__button-save:focus {
+.edit-form__submit-save:focus {
   outline: none;
 }
 
-.edit-form__button-save:hover {
+.edit-form__submit-save:hover {
   cursor: pointer;
   opacity: 0.8;
 }
