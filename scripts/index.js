@@ -47,9 +47,11 @@ const profileFormManager = {
     this.nameInput.value = name;
     this.jobInput.value = job;
   },
+
   getName: function getName() {
     return this.nameInput.value;
   },
+  
   getJob: function getName() {
     return this.jobInput.value
   }
