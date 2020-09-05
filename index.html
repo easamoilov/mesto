@@ -11,21 +11,80 @@
 <body class="page">
   <div class="page__container">
     <header class="header container container_wide">
-      <h1>Header</h1>
+      <div class="header__logo"></div>
     </header>
     <main class="content container">
-      <section class="profile">
-        <h2>profile</h2>
+      <section class="profile page__profile">
+        <div class="profile__avatar"></div>
+        <div class="profile__info">
+          <h1 class="profile__name page__text">Жак-Ив Кусто</h1>
+          <button class="profile__button-edit icon-button"></button>
+          <p class="profile__job page__text">Исследователь океана</p>
+        </div>
+        <button class="profile__button-add icon-button">add</button>
       </section>
-      <div class="elements">
-        <h2>elements</h2>
+      <div class="elements page__elements">
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/karachaevsk.jpg" alt="Картинка 'Карачаевск'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Карачаевск</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/elbrus.jpg" alt="Картинка 'Гора Эльбрус'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Гора Эльбрус</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/dombai.jpg" alt="Картинка 'Домбай'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Домбай</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/elbrus2.jpg" alt="Картинка 'Гора Эльбрус'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Гора Эльбрус</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/dombai.jpg" alt="Картинка 'Домбай'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Домбай</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="./images/blocks/elements/karachaevsk.jpg" alt="Картинка 'Карачаево-Ч...'">
+          <div class="element__group">
+            <h2 class="element__title page__text">Карачаево-Ч...</h2>
+            <button class="element__btn-like">
+          </div>
+        </div>
+      </div>
+
+      <div class="popup">
+        <div class="popup__container">
+          <button class="popup__button-close icon-button"></button>
+          <form class="edit-form" action="">
+            <h2 class="edit-form__title">Редактировать профиль</h2>
+            <input type="text" class="edit-form__input edit-form__input_type_name" value="">
+            <input type="text" class="edit-form__input edit-form__input_type_job" value="">
+            <input type="submit" value="Сохранить" class="edit-form__submit">
+          </form>
+        </div>
       </div>
     </main>
-    <footer class="footer container">
-      <h2>footer</h2>
+    <footer class="footer container page__footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
   </div>
-  <script src="./scripts/script.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>

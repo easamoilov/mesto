@@ -1,0 +1,6 @@
+.popup__container {
+  z-index: 10;
+  display: grid;
+  grid-template: auto auto / auto auto;
+  flex-direction: column;
+}
