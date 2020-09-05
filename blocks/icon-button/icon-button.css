@@ -1,0 +1,18 @@
+.icon-button {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #fff;
+  background-color: transparent;
+  transition: opacity 0.3 ease;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.icon-button:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+.icon-button:focus {
+  outline: none;
+}

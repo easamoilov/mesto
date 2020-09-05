@@ -1,0 +1,13 @@
+.profile__button-add {
+  background-image: url("../../../images/blocks/profile/profile-add-button.svg");
+  height: 50px;
+  border-width: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  .profile__button-add {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+}
