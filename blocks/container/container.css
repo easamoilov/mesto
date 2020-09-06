@@ -5,10 +5,3 @@
   margin-left: var(--main-margin-left);
   margin-right: var(--main-margin-right);
 }
-
-@media screen and (max-width: 600px) {
-  .container_wide {
-    margin-left: 0;
-    margin-right: 0;
-  }
-}

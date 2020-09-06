@@ -5,6 +5,9 @@
   font-weight: normal;
   color: #fff;
   grid-column: 1 / span 2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 

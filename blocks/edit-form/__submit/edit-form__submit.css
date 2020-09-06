@@ -11,11 +11,11 @@
   height: 50px;
 }
 
-.edit-form__submit-save:focus {
+.edit-form__submit:focus {
   outline: none;
 }
 
-.edit-form__submit-save:hover {
+.edit-form__submit:hover {
   cursor: pointer;
-  opacity: 0.8;
+  background-color: rgba(0, 0, 0, .8);
 }

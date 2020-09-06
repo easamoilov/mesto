@@ -5,4 +5,8 @@
   color: #000;
   margin: 0;
   flex-basis: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 10px;
 }

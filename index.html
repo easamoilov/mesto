@@ -17,72 +17,71 @@
       <section class="profile page__profile">
         <div class="profile__avatar"></div>
         <div class="profile__info">
-          <h1 class="profile__name page__text">Жак-Ив Кусто</h1>
-          <button class="profile__button-edit icon-button"></button>
-          <p class="profile__job page__text">Исследователь океана</p>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button type="button" class="profile__button-edit icon-button icon-button_type_edit" aria-label="Редакировать профиль"></button>
+          <p class="profile__job">Исследователь океана</p>
         </div>
-        <button class="profile__button-add icon-button">add</button>
+        <button type="button" class="profile__button-add icon-button icon-button_type_add" aria-label="Добавить профиль"></button>
       </section>
       <div class="elements page__elements">
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/karachaevsk.jpg" alt="Картинка 'Карачаевск'">
           <div class="element__group">
-            <h2 class="element__title page__text">Карачаевск</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Карачаевск</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/elbrus.jpg" alt="Картинка 'Гора Эльбрус'">
           <div class="element__group">
-            <h2 class="element__title page__text">Гора Эльбрус</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/dombai.jpg" alt="Картинка 'Домбай'">
           <div class="element__group">
-            <h2 class="element__title page__text">Домбай</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Домбай</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/elbrus2.jpg" alt="Картинка 'Гора Эльбрус'">
           <div class="element__group">
-            <h2 class="element__title page__text">Гора Эльбрус</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Гора Эльбрус</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/dombai.jpg" alt="Картинка 'Домбай'">
           <div class="element__group">
-            <h2 class="element__title page__text">Домбай</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Домбай</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="./images/blocks/elements/karachaevsk.jpg" alt="Картинка 'Карачаево-Ч...'">
           <div class="element__group">
-            <h2 class="element__title page__text">Карачаево-Ч...</h2>
-            <button class="element__btn-like icon-button"></button>
+            <h2 class="element__title">Карачаево-Ч...</h2>
+            <button type="button" class="icon-button icon-button_type_like" aria-label="Нравится элемент"></button>
           </div>
-        </div>
-      </div>
-
-      <div class="popup">
-        <div class="popup__container">
-          <button class="popup__button-close icon-button"></button>
-          <form class="edit-form">
-            <h2 class="edit-form__title">Редактировать профиль</h2>
-            <input type="text" class="edit-form__input edit-form__input_type_name" value="">
-            <input type="text" class="edit-form__input edit-form__input_type_job" value="">
-            <input type="submit" value="Сохранить" class="edit-form__submit">
-          </form>
         </div>
       </div>
     </main>
     <footer class="footer container page__footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
+  </div>
+  <div class="popup">
+    <div class="popup__container">
+      <button type="button" class="popup__button-close icon-button icon-button_type_close-popup" aria-label="Закрыть редактирование профиля"></button>
+      <form class="edit-form" name="profile-edit-from">
+        <h2 class="edit-form__title">Редактировать профиль</h2>
+        <input type="text" class="edit-form__input edit-form__input_type_name" name="profile-input-name" required placeholder="Введите имя" value="">
+        <input type="text" class="edit-form__input edit-form__input_type_job" name="profile-input-job" required placeholder="Введите информацию о работе" value="">
+        <button type="submit" class="edit-form__submit" name="profile-submit">Сохранить</button>
+      </form>
+    </div>
   </div>
   <script src="./scripts/index.js"></script>
 </body>

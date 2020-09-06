@@ -2,7 +2,7 @@
   box-sizing: border-box;
   display: flex;
   padding-bottom: 40.6px;
-  border-bottom: 1px solid rgba(84, 84, 84, 1);
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
 @media screen and (max-width: 600px) {

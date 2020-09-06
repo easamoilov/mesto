@@ -1,4 +1,5 @@
 .page__container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   max-width: var(--main-max-width);
@@ -6,6 +7,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 45px 0 60px;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 425px) {

@@ -5,16 +5,12 @@ const popupManager = {
 
   openPopup: function openPopup() {
     if (!this.popup.classList.contains("popup_opened")) {
-      !this.popup.classList.add("popup_opened");
-    }
-    if (!this.page.classList.contains("page_overflow-hidden")) {
-      !this.page.classList.add("page_overflow-hidden");
+      this.popup.classList.add("popup_opened");
     }
   },
 
   closePopup: function closePopup() {
     this.popup.classList.remove("popup_opened");
-    this.page.classList.remove("page_overflow-hidden");
   },
 }
 

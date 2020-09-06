@@ -1,0 +1,9 @@
+.icon-button_type_like {
+  margin: 0;
+  padding: 0;
+  background-image: url("../../../../images/blocks/elements/like.svg");
+  border: 0;
+  background-size: cover;
+  width: 24px;
+  height: 19px;
+}
