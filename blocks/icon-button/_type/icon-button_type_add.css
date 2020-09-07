@@ -1,5 +1,5 @@
 .icon-button_type_add {
-  background-image: url("/images/blocks/profile/profile-add-button.svg");
+  background-image: url("../../../images/blocks/profile/profile-add-button.svg");
   height: 50px;
   border-width: 2px;
 }
