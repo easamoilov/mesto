@@ -26,15 +26,6 @@
           aria-label="Добавить профиль"></button>
       </section>
       <div class="elements page__elements">
-        <!-- <div class="element">
-          <img class="element__image" src="./images/blocks/elements/karachaevsk.jpg" alt="Картинка 'Карачаевск'">
-          <div class="element__group">
-            <h2 class="element__title">Карачаевск</h2>
-            <button type="button" class="element__like icon-button icon-button_type_like"
-              aria-label="Нравится элемент"></button>
-          </div>
-          <button class="element__delete icon-button icon-button_type_delete"></button>
-        </div> -->
       </div>
     </main>
     <footer class="footer container page__footer">
@@ -45,15 +36,27 @@
     <div class="popup__container">
       <button type="button" class="popup__button-close icon-button icon-button_type_close-popup"
         aria-label="Закрыть редактирование профиля"></button>
-      <form class="edit-form" name="profile-edit-from">
-        <h2 class="edit-form__title">Редактировать профиль</h2>
-        <input type="text" class="edit-form__input edit-form__input_type_name" name="profile-input-name" required
-          placeholder="Введите имя" value="">
-        <input type="text" class="edit-form__input edit-form__input_type_job" name="profile-input-job" required
-          placeholder="Введите информацию о работе" value="">
-        <button type="submit" class="edit-form__submit" name="profile-submit">Сохранить</button>
-      </form>
+      <div class="popup__content">
+      </div>
     </div>
+  </div>
+  <div style="display: none;">
+    <form class="profile-form form" name="profile-from">
+      <h2 class="form__title">Редактировать профиль</h2>
+      <input type="text" class="profile-form__name form__input" name="profile-input-name" required
+        placeholder="Введите имя" value="" autocomplete="false">
+      <input type="text" class="profile-form__job form__input" name="profile-input-job" required
+        placeholder="Введите информацию о работе" value="" autocomplete="false">
+      <button type="submit" class="profile-form__submit form__submit" name="profile-submit">Сохранить</button>
+    </form>
+    <form class="element-form form" name="element-from">
+      <h2 class="form__title">Новое место</h2>
+      <input type="text" class="element-form__name form__input" name="element-input-name" required
+        placeholder="Название" value="" autocomplete="false">
+      <input type="text" class="element-form__link form__input" name="element-input-link" required
+        placeholder="Ссылка на картинку" value="" autocomplete="false">
+      <button type="submit" class="element-form__submit form__submit" name="element-submit">Создать</button>
+    </form>
   </div>
   <template id="template-element">
     <div class="element">

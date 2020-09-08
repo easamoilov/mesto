@@ -1,6 +1,4 @@
-.edit-form {
-  display: flex;
-  flex-direction: column;
+.popup__content {
   box-sizing: border-box;
   background-color: #fff;
   padding: 34px 36px 36px 36px;

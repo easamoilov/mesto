@@ -28,8 +28,11 @@ const popupManager = {
   page: document.querySelector(".page"),
   popup: document.querySelector(".popup"),
   closeButton: document.querySelector(".popup__button-close"),
+  popupContent: document.querySelector(".popup__content"),
 
-  openPopup: function openPopup() {
+  openPopup: function openPopup(content) {
+    this.popupContent.innerHTML = "";
+    this.popupContent.append(content);
     if (!this.popup.classList.contains("popup_opened")) {
       this.popup.classList.add("popup_opened");
     }
@@ -37,6 +40,7 @@ const popupManager = {
 
   closePopup: function closePopup() {
     this.popup.classList.remove("popup_opened");
+    this.popupContent.innerHTML = "";
   },
 }
 
@@ -54,28 +58,28 @@ const profileManager = {
     return this.profileJob.textContent;
   },
 
-  save: function (name, job) {
-    this.profileName.textContent = name;
-    this.profileJob.textContent = job;
+  manageData: function (data) {
+    this.profileName.textContent = data.name;
+    this.profileJob.textContent = data.job;
   }
 }
 
 const profileFormManager = {
-  form: document.querySelector(".edit-form"),
-  nameInput: document.querySelector(".edit-form__input_type_name"),
-  jobInput: document.querySelector(".edit-form__input_type_job"),
+  form: document.querySelector(".profile-form"),
+  nameInput: document.querySelector(".profile-form__name"),
+  jobInput: document.querySelector(".profile-form__job"),
 
   setFields: function setFields(name, job) {
+    console.log(this.form);
     this.nameInput.value = name;
     this.jobInput.value = job;
   },
 
-  getName: function getName() {
-    return this.nameInput.value;
-  },
-
-  getJob: function getName() {
-    return this.jobInput.value
+  getData: function getData() {
+    return {
+      name: this.nameInput.value,
+      job: this.jobInput.value
+    };
   }
 }
 
@@ -85,6 +89,10 @@ const elementsManager = {
 
   addElement: function addElement(element) {
     this.elementsContainer.append(element);
+  },
+
+  insertElement: function insertElement(element) {
+    this.elementsContainer.prepend(element);
   },
 
   createFromTemplate: function createFromTemplate(data) {
@@ -106,26 +114,70 @@ const elementsManager = {
     });
 
     return element;
+  },
+
+  manageData: function manageData(data) {
+    let element = this.createFromTemplate(data);
+    this.insertElement(element);
   }
 }
 
+const elementFormManager = {
+  form: document.querySelector(".element-form"),
+  nameInput: document.querySelector(".element-form__name"),
+  linkInput: document.querySelector(".element-form__link"),
+
+  clear: function clear() {
+    this.nameInput.value = "";
+    this.linkInput.value = "";
+  },
+
+  getData: function getData() {
+    return {
+      name: this.nameInput.value,
+      link: this.linkInput.value
+    };
+  }
+}
+
+function isValid(data) {
+  return Object.values(data).some(x => {
+    return x != "";
+  })
+}
+
 function initSubscriptions() {
+  const submitData = function submitData(evt, data, manager) {
+    evt.preventDefault();
+    if (!isValid(data)) return;
+    manager.manageData(data);
+    popupManager.closePopup();
+  }
+
+  profileFormManager.form.addEventListener('submit', (evt) => {
+    submitData(evt, profileFormManager.getData(), profileManager)
+  });
+
+  elementFormManager.form.addEventListener('submit', (evt) => {
+    console.log(evt.target);
+    submitData(evt, elementFormManager.getData(), elementsManager);
+  });
+
   profileManager.editButton.addEventListener('click', () => {
     profileFormManager.setFields(profileManager.getName(), profileManager.getJob());
-    popupManager.openPopup();
+    popupManager.openPopup(profileFormManager.form);
   });
 
   popupManager.closeButton.addEventListener('click', () => {
     popupManager.closePopup();
   });
 
-  profileFormManager.form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    profileManager.save(profileFormManager.getName(), profileFormManager.getJob());
-    popupManager.closePopup();
+  profileManager.addButton.addEventListener('click', () => {
+    elementFormManager.clear();
+    popupManager.openPopup(elementFormManager.form);
   });
-}
 
+}
 
 function loadElements() {
   initialCards.forEach(x => {
