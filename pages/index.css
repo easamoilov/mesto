@@ -44,11 +44,6 @@
 @import url("../blocks/popup/_opened/popup_opened.css");
 @import url("../blocks/popup/__content/popup__content.css");
 
-@import url("../blocks/edit-form/edit-form.css");
-@import url("../blocks/edit-form/__title/edit-form__title.css");
-@import url("../blocks/edit-form/__input/edit-form__input.css");
-@import url("../blocks/edit-form/__submit/edit-form__submit.css");
-
 @import url("../blocks/form/form.css");
 @import url("../blocks/form/__input/form__input.css");
 @import url("../blocks/form/__submit/form__submit.css");
