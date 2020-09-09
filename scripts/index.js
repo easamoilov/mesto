@@ -40,7 +40,6 @@ const popupManager = {
 
   closePopup: function closePopup() {
     this.popup.classList.remove("popup_opened");
-    this.popupContent.innerHTML = "";
   },
 }
 
@@ -70,7 +69,6 @@ const profileFormManager = {
   jobInput: document.querySelector(".profile-form__job"),
 
   setFields: function setFields(name, job) {
-    console.log(this.form);
     this.nameInput.value = name;
     this.jobInput.value = job;
   },
@@ -80,6 +78,18 @@ const profileFormManager = {
       name: this.nameInput.value,
       job: this.jobInput.value
     };
+  }
+}
+
+const elementImageManager = {
+  figure: document.querySelector(".figure"),
+  figureImage: document.querySelector(".figure__image"),
+  figureCaption: document.querySelector(".figure__caption"),
+
+  manageData: function manageData(data) {
+    this.figureImage.src = data.link;
+    this.figureImage.alt = `Картинка '${data.name}'`;
+    this.figureCaption.textContent = data.name;
   }
 }
 
@@ -112,6 +122,12 @@ const elementsManager = {
     element.querySelector(".element__like").addEventListener('click', (evt) => {
       evt.target.classList.toggle("icon-button_type_like-active");
     });
+
+    elementImage.addEventListener('click', () => {
+      elementImageManager.manageData(data);
+
+      popupManager.openPopup(elementImageManager.figure);
+    })
 
     return element;
   },
@@ -159,7 +175,6 @@ function initSubscriptions() {
   });
 
   elementFormManager.form.addEventListener('submit', (evt) => {
-    console.log(evt.target);
     submitData(evt, elementFormManager.getData(), elementsManager);
   });
 
@@ -176,7 +191,6 @@ function initSubscriptions() {
     elementFormManager.clear();
     popupManager.openPopup(elementFormManager.form);
   });
-
 }
 
 function loadElements() {
