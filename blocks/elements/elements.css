@@ -2,8 +2,7 @@
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: auto;
-  grid-auto-rows: min-content;
+  grid-auto-rows: 1fr;
 }
 
 @media screen and (max-width: 600px) {
