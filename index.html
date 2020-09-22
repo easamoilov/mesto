@@ -52,10 +52,12 @@
     </form>
     <form class="element-form form" name="element-from">
       <h2 class="form__title">Новое место</h2>
-      <input type="text" class="element-form__name form__input" name="element-input-name" required
+      <input type="text" class="element-form__name form__input" name="element-input-name" id="name-input" required
         placeholder="Название" value="" autocomplete="false">
-      <input type="text" class="element-form__link form__input" name="element-input-link" required
+      <span class="form__input-error" id="name-input-error">Test</span>
+      <input type="text" class="element-form__link form__input" name="element-input-link" id="link-input" required
         placeholder="Ссылка на картинку" value="" autocomplete="false">
+      <span class="form__input-error" id="link-input-error">Test</span>
       <button type="submit" class="element-form__submit form__submit" name="element-submit">Создать</button>
     </form>
     <figure class="figure">
@@ -75,6 +77,7 @@
     </div>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validation.js"></script>
 </body>
 
 </html>
