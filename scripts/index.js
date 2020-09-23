@@ -35,12 +35,12 @@ const popupManager = {
     this.popupContent.innerHTML = "";
     this.popupContent.append(content);
     this.popup.classList.add("popup_opened");
-    document.addEventListener('keydown', this.keyHandler);
+    document.addEventListener('keyup', this.keyHandler);
   },
 
   closePopup: function closePopup() {
     this.popup.classList.remove("popup_opened");
-    document.removeEventListener('keydown', this.keyHandler);
+    document.removeEventListener('keyup', this.keyHandler);
   },
 
   canClosePopup: function canClosePopup(target) {
@@ -124,8 +124,6 @@ const elementsManager = {
     elementImage.src = data.link;
     elementImage.alt = `Картинка '${data.name}'`;
 
-    const deleteButton = element.querySelector(".element__delete");
-
     element.querySelector(".element__delete").addEventListener('click', (evt) => {
       evt.target.parentNode.remove();
     });
@@ -155,8 +153,7 @@ const elementFormManager = {
   linkInput: document.querySelector(".element-form__link"),
 
   clear: function clear() {
-    this.nameInput.value = "";
-    this.linkInput.value = "";
+    this.form.reset();
   },
 
   getData: function getData() {
