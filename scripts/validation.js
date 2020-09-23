@@ -62,7 +62,8 @@ const enableValidation = (settings) => {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
       if (hasInvalidInput(inputList)) {
-        //использую данный метод для того, чтобы подписка submit в index.js не выполнялась.      
+        //@Максим Габриелов - спасибо за отзыв
+        //использую данный метод для того, чтобы подписка submit в index.js не выполнялась.
         evt.stopImmediatePropagation();
       }
     });
