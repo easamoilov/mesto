@@ -42,20 +42,32 @@
     </div>
   </div>
   <div style="display: none;">
-    <form class="profile-form form" name="profile-from">
+    <form class="profile-form form" name="profile-from" novalidate>
       <h2 class="form__title">Редактировать профиль</h2>
-      <input type="text" class="profile-form__name form__input" name="profile-input-name" required
-        placeholder="Введите имя" value="" autocomplete="false">
-      <input type="text" class="profile-form__job form__input" name="profile-input-job" required
-        placeholder="Введите информацию о работе" value="" autocomplete="false">
+      <label class="form__field">
+        <input type="text" class="profile-form__name form__input" name="profile-input-name" id="name-input" required
+          placeholder="Введите имя" value="" autocomplete="false" minlength="2" maxlength="40">
+        <span class="form__input-error" id="name-input-error"></span>
+      </label>
+      <label class="form__field">
+        <input type="text" class="profile-form__job form__input" name="profile-input-job" id="job-input" required
+          placeholder="Введите информацию о работе" value="" autocomplete="false" minlength="2" maxlength="200">
+        <span class="form__input-error" id="job-input-error"></span>
+      </label>
       <button type="submit" class="profile-form__submit form__submit" name="profile-submit">Сохранить</button>
     </form>
-    <form class="element-form form" name="element-from">
+    <form class="element-form form" name="element-from" novalidate>
       <h2 class="form__title">Новое место</h2>
-      <input type="text" class="element-form__name form__input" name="element-input-name" required
-        placeholder="Название" value="" autocomplete="false">
-      <input type="text" class="element-form__link form__input" name="element-input-link" required
-        placeholder="Ссылка на картинку" value="" autocomplete="false">
+      <label class="form__field">
+        <input type="text" class="element-form__name form__input" name="element-input-name" id="name-input" required
+          placeholder="Название" value="" autocomplete="false" minlength="2" maxlength="30">
+        <span class="form__input-error" id="name-input-error"></span>
+      </label>
+      <label class="form__field">
+        <input type="url" class="element-form__link form__input" name="element-input-link" id="link-input" required
+          placeholder="Ссылка на картинку" value="" autocomplete="false">
+        <span class="form__input-error" id="link-input-error"></span>
+      </label>
       <button type="submit" class="element-form__submit form__submit" name="element-submit">Создать</button>
     </form>
     <figure class="figure">
@@ -74,6 +86,7 @@
       <button class="element__delete icon-button icon-button_type_delete" aria-label="Удалить элемент"></button>
     </div>
   </template>
+  <script src="./scripts/validation.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
