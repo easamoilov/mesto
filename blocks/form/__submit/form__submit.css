@@ -1,5 +1,5 @@
 .form__submit {
-  margin-top: 48px;
+  margin-top: 31px;
   font-size: 18px;
   line-height: 1.2;
   color: #fff;
@@ -9,6 +9,7 @@
   border: 0;
   transition: opacity .3 ease;
   height: 50px;
+  pointer-events: all;
 }
 
 .form__submit:focus {
