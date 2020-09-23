@@ -29,17 +29,28 @@ const popupManager = {
   popup: document.querySelector(".popup"),
   closeButton: document.querySelector(".popup__button-close"),
   popupContent: document.querySelector(".popup__content"),
+  popupContainer: document.querySelector(".popup__container"),
 
   openPopup: function openPopup(content) {
     this.popupContent.innerHTML = "";
     this.popupContent.append(content);
-    if (!this.popup.classList.contains("popup_opened")) {
-      this.popup.classList.add("popup_opened");
-    }
+    this.popup.classList.add("popup_opened");
+    document.addEventListener('keydown', this.keyHandler);
   },
 
   closePopup: function closePopup() {
     this.popup.classList.remove("popup_opened");
+    document.removeEventListener('keydown', this.keyHandler);
+  },
+
+  canClosePopup: function canClosePopup(target) {
+    return target === this.popup || target === this.closeButton || target === this.popupContainer;
+  },
+
+  keyHandler: function keyHandler(evt) {
+    if (evt.key === "Escape") {
+      popupManager.closePopup();
+    }
   },
 }
 
@@ -133,7 +144,7 @@ const elementsManager = {
   },
 
   manageData: function manageData(data) {
-    let element = this.createFromTemplate(data);
+    const element = this.createFromTemplate(data);
     this.insertElement(element);
   }
 }
@@ -156,16 +167,9 @@ const elementFormManager = {
   }
 }
 
-function isValid(data) {
-  return Object.values(data).some(x => {
-    return x != "";
-  })
-}
-
 function initSubscriptions() {
   const submitData = function submitData(evt, data, manager) {
     evt.preventDefault();
-    if (!isValid(data)) return;
     manager.manageData(data);
     popupManager.closePopup();
   }
@@ -183,8 +187,10 @@ function initSubscriptions() {
     popupManager.openPopup(profileFormManager.form);
   });
 
-  popupManager.closeButton.addEventListener('click', () => {
-    popupManager.closePopup();
+  popupManager.popup.addEventListener('click', (evt) => {
+    if (popupManager.canClosePopup(evt.target)) {
+      popupManager.closePopup();
+    }
   });
 
   profileManager.addButton.addEventListener('click', () => {
@@ -195,7 +201,7 @@ function initSubscriptions() {
 
 function loadElements() {
   initialCards.forEach(x => {
-    let element = elementsManager.createFromTemplate(x);
+    const element = elementsManager.createFromTemplate(x);
     elementsManager.addElement(element);
   });
 }
