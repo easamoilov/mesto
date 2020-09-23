@@ -39,16 +39,8 @@ const checkInputValidity = (formElement, inputElement, settings) => {
   }
 };
 
-const setEventListeners = (formElement, settings) => {
-  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+const setEventListeners = (formElement, inputList, settings) => {
   const buttonElement = formElement.querySelector(settings.submitButtonSelector);
-
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    if (hasInvalidInput(inputList)) {
-      evt.stopImmediatePropagation();
-    }
-  });
 
   toggleButtonState(inputList, buttonElement, settings);
 
@@ -64,7 +56,19 @@ const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
   formList.forEach((formElement) => {
-    setEventListeners(formElement, settings);
+
+    const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      if (hasInvalidInput(inputList)) {
+        //@Максим Габриелов - спасибо за отзыв
+        //использую данный метод для того, чтобы подписка submit в index.js не выполнялась.
+        evt.stopImmediatePropagation();
+      }
+    });
+
+    setEventListeners(formElement, inputList, settings);
   })
 }
 
