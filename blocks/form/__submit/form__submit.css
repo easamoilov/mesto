@@ -1,5 +1,5 @@
-.edit-form__submit {
-  margin-top: 48px;
+.form__submit {
+  margin-top: 31px;
   font-size: 18px;
   line-height: 1.2;
   color: #fff;
@@ -9,13 +9,14 @@
   border: 0;
   transition: opacity .3 ease;
   height: 50px;
+  pointer-events: all;
 }
 
-.edit-form__submit:focus {
+.form__submit:focus {
   outline: none;
 }
 
-.edit-form__submit:hover {
+.form__submit:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, .8);
 }
