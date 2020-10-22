@@ -3,7 +3,7 @@
   padding: 0;
   background-image: url("/images/blocks/elements/like.svg");
   border: 0;
-  background-size: cover;
+  background-size: contain;
   width: 24px;
   height: 19px;
 }

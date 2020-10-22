@@ -1,73 +1,75 @@
-const popupManager = {
-  page: document.querySelector(".page"),
-  popup: document.querySelector(".popup"),
-  closeButton: document.querySelector(".popup__button-close"),
+import {
+  initialCards
+} from "./data.js";
 
-  openPopup: function openPopup() {
-    if (!this.popup.classList.contains("popup_opened")) {
-      this.popup.classList.add("popup_opened");
-    }
-  },
+import {
+  cardConfig,
+  popupConfig,
+  profileConfig,
+  cardDetailsConfig,
+  profileFormConfig,
+  cardFormConfig,
+  formValidationConfig
+} from "./config.js";
 
-  closePopup: function closePopup() {
-    this.popup.classList.remove("popup_opened");
-  },
-}
+import Popup from "./popup.js";
+import CardDetails from "./card/cardDetails.js";
+import Card from "./card/card.js";
+import CardsContainer from "./card/cardsContainer.js";
+import Profile from "./profile.js";
+import ProfileForm from "./form/profileForm.js";
+import CardForm from "./form/cardForm.js";
+import FormValidator from "./validation.js";
 
-const profileManager = {
-  editButton: document.querySelector(".profile__button-edit"),
-  addButton: document.querySelector(".profile__button-add"),
-  profileName: document.querySelector(".profile__name"),
-  profileJob: document.querySelector(".profile__job"),
 
-  getName: function getName() {
-    return this.profileName.textContent;
-  },
+const popup = new Popup(popupConfig);
+const showPopup = (content) => popup.openPopup(content);
+const hidePopup = () => popup.closePopup();
 
-  getJob: function getJob() {
-    return this.profileJob.textContent;
-  },
+const cardDetails = new CardDetails(cardDetailsConfig, showPopup);
+const cardsContainer = new CardsContainer(cardConfig.cardsContainerSelector);
 
-  save: function (name, job) {
-    this.profileName.textContent = name;
-    this.profileJob.textContent = job;
+const profile = new Profile(profileConfig);
+const profileForm = new ProfileForm(profileFormConfig, profile, showPopup, hidePopup);
+
+const cardFormManager = {
+  manageData: function manageData(data) {
+    const cardElement = Card.createCardElement(data, cardConfig, cardDetails);
+    cardsContainer.insert(cardElement);
   }
 }
+const cardForm = new CardForm(cardFormConfig, cardFormManager, showPopup, hidePopup);
 
-const profileFormManager = {
-  form: document.querySelector(".edit-form"),
-  nameInput: document.querySelector(".edit-form__input_type_name"),
-  jobInput: document.querySelector(".edit-form__input_type_job"),
 
-  setFields: function setFields(name, job) {
-    this.nameInput.value = name;
-    this.jobInput.value = job;
-  },
 
-  getName: function getName() {
-    return this.nameInput.value;
-  },
-  
-  getJob: function getName() {
-    return this.jobInput.value
-  }
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll(formValidationConfig.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, formValidationConfig);
+    validator.enableValidation();
+  });
+
 }
 
 function initSubscriptions() {
-  profileManager.editButton.addEventListener('click', () => {
-    profileFormManager.setFields(profileManager.getName(), profileManager.getJob());
-    popupManager.openPopup();
+
+  document.querySelector(".profile__button-edit").addEventListener('click', () => {
+    profileForm.openForm();
   });
 
-  popupManager.closeButton.addEventListener('click', () => {
-    popupManager.closePopup();
-  });
-
-  profileFormManager.form.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    profileManager.save(profileFormManager.getName(), profileFormManager.getJob());
-    popupManager.closePopup();
+  document.querySelector(".profile__button-add").addEventListener('click', () => {
+    cardForm.openForm();
   });
 }
 
+function loadElements() {
+  initialCards.forEach(data => {
+    const cardElement = Card.createCardElement(data, cardConfig, cardDetails);
+    cardsContainer.add(cardElement);
+  });
+}
+
+
+enableValidation();
 initSubscriptions();
+loadElements();

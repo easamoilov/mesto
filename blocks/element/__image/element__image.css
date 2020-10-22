@@ -1,5 +1,7 @@
 .element__image {
-  object-fit: cover;
+  object-fit: fill;
   width: 100%;
   flex-basis: 100%;
+  max-height: 282px;
+  cursor: pointer;
 }

@@ -1,4 +1,6 @@
-.edit-form__input {
+.form__input {
+  margin: 0;
+  padding: 0;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-size: 14px;
@@ -6,15 +8,7 @@
   color: #000;
 }
 
-.edit-form__input:focus {
+.form__input:focus {
   border-color: #000;
   outline: none;
-}
-
-.edit-form__input:nth-child(2){
-  margin-top: 54px;
-}
-
-.edit-form__input:nth-child(3){
-  margin-top: 29px;
 }
