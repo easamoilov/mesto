@@ -8,18 +8,17 @@ export default class Popup {
     this._initSubscriptions();
   }
 
-  openPopup(content) {
-    this._setContent(content);
+  open() {
     this._popup.classList.add("popup_opened");
     this._onOpen();
   }
 
-  closePopup() {
+  close() {
     this._popup.classList.remove("popup_opened");
     this._onClose();
   }
 
-  _initSubscriptions() {
+  initSubscriptions() {
     this._popup.addEventListener('click', (evt) => {
       if (this._canClosePopup(evt.target)) {
         this.closePopup();

@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import {
   initialCards
 } from "./data.js";
@@ -12,14 +14,14 @@ import {
   formValidationConfig
 } from "./config.js";
 
-import Popup from "./popup.js";
+import Popup from "./popup/popup.js";
 import CardDetails from "./card/cardDetails.js";
 import Card from "./card/card.js";
-import CardsContainer from "./card/cardsContainer.js";
 import Profile from "./profile.js";
 import ProfileForm from "./form/profileForm.js";
 import CardForm from "./form/cardForm.js";
 import FormValidator from "./validation.js";
+import Section from "./section.js";
 
 
 const popup = new Popup(popupConfig);
@@ -62,14 +64,17 @@ function initSubscriptions() {
   });
 }
 
-function loadElements() {
-  initialCards.forEach(data => {
-    const cardElement = Card.createCardElement(data, cardConfig, cardDetails);
-    cardsContainer.add(cardElement);
-  });
+const renderer = (data) => {
+  const cardElement = Card.createCardElement(data, cardConfig, cardDetails);
 }
 
+const cardsSection = new Section({items:initialCards, renderer: (data)=>{
+  const cardElement = Card.createCardElement(data, cardConfig, cardDetails);
+  cardsSection.addItem(cardElement);
+}},cardConfig.cardsContainerSelector);
 
 enableValidation();
 initSubscriptions();
-loadElements();
+//loadElements();
+
+cardsSection.renderItems();
