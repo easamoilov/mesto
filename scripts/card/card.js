@@ -3,7 +3,6 @@ export default class Card {
     this._name = data.name;
     this._link = data.link;
     this._cardConfig = cardConfig;
-    //this._openCardHandler = openCardHandler;
     this._cardDetails = cardDetails;
   }
 
@@ -21,11 +20,13 @@ export default class Card {
 
   _initSubscriptions() {
     this._cardTemplate.querySelector(this._cardConfig.deleteButtonSelector).addEventListener('click', (evt) => {
+      this._cardTemplate = null;
+      this._cardDetails = null;
       evt.target.parentNode.remove();
     });
 
     this._cardTemplate.querySelector(this._cardConfig.likeButtonSelector).addEventListener('click', (evt) => {
-      evt.target.classList.toggle("icon-button_type_like-active");
+      evt.target.classList.toggle(this._cardConfig.likeButtonModifier);
     });
 
     this._cardTemplate.querySelector(this._cardConfig.imageSelector).addEventListener('click', () => {

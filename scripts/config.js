@@ -5,6 +5,7 @@ export const cardConfig = {
   deleteButtonSelector: ".element__delete",
   likeButtonSelector: ".element__like",
   cardsContainerSelector: ".elements",
+  likeButtonModifier:"icon-button_type_like-active",
 }
 
 export const popupConfig = {
@@ -29,12 +30,14 @@ export const profileFormConfig = {
   formSelector: ".profile-form",
   nameSelector: ".profile-form__name",
   jobSelector: ".profile-form__job",
+  formOpenEvent: "open",
 }
 
 export const cardFormConfig = {
   formSelector: ".element-form",
   nameSelector: ".element-form__name",
   linkSelector: ".element-form__link",
+  formOpenEvent: "open",
 }
 
 export const formValidationConfig = {
@@ -43,5 +46,6 @@ export const formValidationConfig = {
   submitButtonSelector: '.form__submit',
   inactiveButtonClass: 'form__submit_inactive',
   inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
+  errorClass: 'form__input-error_active',
+  formOpenEvent: "open",
 }

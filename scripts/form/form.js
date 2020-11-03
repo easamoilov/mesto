@@ -6,6 +6,7 @@ export default class Form {
     this._showHanlder = showHandler;
     this._hideHandler = hideHandler;
     this._initSubscription();
+    this._onOpenEvent = new CustomEvent(config.formOpenEvent,{target: this._form});
   }
 
   _initSubscription() {
@@ -15,7 +16,6 @@ export default class Form {
   }
 
   _submit(evt) {
-    console.log("submit form")
     evt.preventDefault();
     const data = this._getData();
     this._formManager.manageData(data);
@@ -25,5 +25,10 @@ export default class Form {
   openForm() {
     this._fillForm();
     this._showHanlder(this._form);
+    this._raiseOnOpen();
+  }
+
+  _raiseOnOpen(){
+    this._form.dispatchEvent(this._onOpenEvent);
   }
 }
