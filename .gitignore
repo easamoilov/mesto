@@ -2,3 +2,4 @@ russian-travel.code-workspace
 .editorconfig
 node_modules
 dist
+node_modules
