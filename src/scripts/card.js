@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(data, cardConfig, cardDetails) {
+  constructor(data, cardConfig, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardConfig = cardConfig;
-    this._cardDetails = cardDetails;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -21,7 +21,6 @@ export default class Card {
   _initSubscriptions() {
     this._cardTemplate.querySelector(this._cardConfig.deleteButtonSelector).addEventListener('click', (evt) => {
       this._cardTemplate = null;
-      this._cardDetails = null;
       evt.target.parentNode.remove();
     });
 
@@ -30,11 +29,7 @@ export default class Card {
     });
 
     this._cardTemplate.querySelector(this._cardConfig.imageSelector).addEventListener('click', () => {
-      this._cardDetails.open({
-        name: this._name,
-        link: this._link
-      });
-      //this._openCardHandler(this._name, this._link);
+      this._handleCardClick();
     })
   }
 
@@ -45,8 +40,8 @@ export default class Card {
     return this._cardTemplate;
   }
 
-  static createCardElement(data, cardConfig, cardDetails) {
-    const card = new Card(data, cardConfig, cardDetails);
+  static createCardElement(data, cardConfig, handleCardClick) {
+    const card = new Card(data, cardConfig, handleCardClick);
     return card.generateCard();
   }
 }
