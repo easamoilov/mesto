@@ -8,38 +8,6 @@ export const cardConfig = {
   likeButtonModifier:"icon-button_type_like-active",
 }
 
-export const popupConfig = {
-  popupSelector: ".popup",
-  buttonCloseSelector: ".popup__button-close",
-  contentSelector: ".popup__content",
-  containerSelector: ".popup__container"
-}
-
-export const profileConfig = {
-  nameSelector: ".profile__name",
-  jobSelector: ".profile__job",
-}
-
-export const cardDetailsConfig = {
-  figureSelector: ".figure",
-  imageSelector: ".figure__image",
-  captionSelector: ".figure__caption",
-}
-
-export const profileFormConfig = {
-  formSelector: ".profile-form",
-  nameSelector: ".profile-form__name",
-  jobSelector: ".profile-form__job",
-  formOpenEvent: "open",
-}
-
-export const cardFormConfig = {
-  formSelector: ".element-form",
-  nameSelector: ".element-form__name",
-  linkSelector: ".element-form__link",
-  formOpenEvent: "open",
-}
-
 export const formValidationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',

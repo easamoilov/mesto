@@ -21,7 +21,6 @@ export default class Card {
   _initSubscriptions() {
     this._cardTemplate.querySelector(this._cardConfig.deleteButtonSelector).addEventListener('click', (evt) => {
       this._cardTemplate = null;
-      this._cardDetails = null;
       evt.target.parentNode.remove();
     });
 
@@ -31,11 +30,6 @@ export default class Card {
 
     this._cardTemplate.querySelector(this._cardConfig.imageSelector).addEventListener('click', () => {
       this._handleCardClick();
-      /*this._cardDetails.open({
-        name: this._name,
-        link: this._link
-      });*/
-      //this._openCardHandler(this._name, this._link);
     })
   }
 

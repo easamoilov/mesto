@@ -9,8 +9,8 @@ export default class Section {
     this._container.append(item);
   }
 
-  insertItem(){
-    this._container.preppend(item);
+  insertItem(item){
+    this._container.prepend(item);
   }
 
   clear(){
