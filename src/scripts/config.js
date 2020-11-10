@@ -5,7 +5,7 @@ export const cardConfig = {
   deleteButtonSelector: ".element__delete",
   likeButtonSelector: ".element__like",
   cardsContainerSelector: ".elements",
-  likeButtonModifier:"icon-button_type_like-active",
+  likeButtonModifier: "icon-button_type_like-active",
 }
 
 export const formValidationConfig = {
@@ -16,4 +16,9 @@ export const formValidationConfig = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active',
   formOpenEvent: "open",
+}
+
+export const apiConfig = {
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-17",
+  token: "543c1d53-4f5f-4fd4-8bd1-0e9e6354f53b"
 }
