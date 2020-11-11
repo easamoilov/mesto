@@ -28,7 +28,7 @@ export default class FormsValidator {
   _setEventListeners() {
     this._toggleButtonState();
 
-    this._formElement.addEventListener(this._config.formOpenEvent, (evt)=>{
+    this._formElement.addEventListener(this._config.formOpenEvent, (evt) => {
       this._toggleButtonState();
     });
 

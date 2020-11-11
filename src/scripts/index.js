@@ -1,10 +1,6 @@
 import '../pages/index.css';
 
 import {
-  initialCards
-} from "./data.js";
-
-import {
   cardConfig,
   formValidationConfig,
   apiConfig
@@ -26,44 +22,68 @@ const api = new Api({
   }
 });
 
-const popupWithImage = new PopupWithImage(".js-card-details");
-
-const createCard = (data) => {
-  const cardElement = Card.createCardElement(data, cardConfig, () => {
-    popupWithImage.prepareContent(data);
-    popupWithImage.open();
-  });
-  return cardElement;
-}
-
-const cardsSection = new Section({
-  items: initialCards,
-  renderer: (data) => {
-    const cardElement = createCard(data);
-    cardsSection.addItem(cardElement);
-  }
-}, cardConfig.cardsContainerSelector);
+const cardsSection = new Section(cardConfig.cardsContainerSelector);
 
 const userInfo = new UserInfo();
-const userFormPopup = new PopupWithForm(".js-user-info", ([name, job]) => {
-  userInfo.setUserInfo({
-    name,
-    job
-  })
+
+const popupWithImage = new PopupWithImage(".js-card-details");
+
+const userFormPopup = new PopupWithForm(".js-user-info", ([name, about]) => {
+  return api.updateUserInfo({ name, about })
+    .then(data => userInfo.setUserInfo(data));
 });
 
 const cardFormPopup = new PopupWithForm(".js-card", ([name, link]) => {
-  const cardElement = createCard({
-    name,
-    link
-  });
-  cardsSection.insertItem(cardElement);
+  return api.addCard({ name, link })
+    .then(data => {
+      const cardElement = createCard(data);
+      cardsSection.insertItem(cardElement);
+    });
 });
+
+const deleteCardPopup = new PopupWithForm(".js-delete-card", () => {
+  const cardId = deleteCardPopup.cardId;
+  return api.deleteCard(cardId)
+    .then(() => {
+      cardsSection.deleteById(Card.getIdSelector(cardId));
+    })
+    .catch(err => console.log(err));
+});
+
+const editAvatarForm = new PopupWithForm(".js-avatar", ([avatarLink]) => {
+  return api.updateAvatar(avatarLink)
+    .then(() => {
+      userInfo.setAvatar(avatarLink);
+    })
+    .catch(err => console.log(err));
+});
+
+const createCard = (data) => {
+  const cardClick = () => {
+    popupWithImage.prepareContent(data);
+    popupWithImage.open();
+  };
+
+  const cardLike = (cardId, isLiked) => {
+    return api.like(cardId, !isLiked);
+  };
+
+  const cardDelete = (cardId) => {
+    deleteCardPopup.cardId = cardId;
+    deleteCardPopup.open();
+  };
+
+  const cardElement = Card.createCardElement(data, userInfo.id, cardConfig, cardClick, cardLike, cardDelete);
+  return cardElement;
+}
 
 function initSubscriptions() {
   popupWithImage.setEventListeners();
   cardFormPopup.setEventListeners();
   userFormPopup.setEventListeners();
+  deleteCardPopup.setEventListeners();
+  deleteCardPopup.renderOnLoading = false;
+  editAvatarForm.setEventListeners();
 
   document.querySelector(".profile__button-edit").addEventListener('click', () => {
     const userInfoData = userInfo.getUserInfo();
@@ -76,6 +96,13 @@ function initSubscriptions() {
     cardFormPopup.open();
     cardFormPopup.raiseFormEvent(formValidationConfig.formOpenEvent);
   });
+
+  document.querySelector(".icon-button_type_avatar").addEventListener('click', () => {
+    const avatarLink = userInfo.getAvatar();
+    editAvatarForm.setFields({ avatarLink });
+    editAvatarForm.open();
+    editAvatarForm.raiseFormEvent(formValidationConfig.formOpenEvent);
+  })
 }
 
 function enableValidation() {
@@ -90,40 +117,28 @@ function enableValidation() {
 function loadUserInfo() {
   return api.getUserInfo()
     .then(data => {
-      userInfo.setUserInfo({
+      userInfo.init({
+        id: data._id,
         name: data.name,
-        job: data.about
+        about: data.about,
+        avatar: data.avatar
       });
-      userInfo.setAvatar(data.avatar);
-    })
-    .catch(reason => {
-      console.log(reason);
-    })
+    });
 }
 
 function loadCards() {
-  return api.getCards()
-  .then(data=>{
-    data.forEach(x=>{
-      console.log({name:x.name,link:x.link});
-    });
-    const cardsSection = new Section({
-      items: data.map(x=>{x.name,x.link}),
-      renderer: (data) => {
-        const cardElement = createCard(data);
+  return api.getInitialCards()
+    .then(data => {
+      data.forEach(x => {
+        const cardElement = createCard(x);
         cardsSection.addItem(cardElement);
-      }
-    }, cardConfig.cardsContainerSelector);
-    cardsSection.renderItems();
-  })
-  .catch(err=>{
-    console.log(err);
-  })
+      })
+    });
 }
 
-Promise.all([loadUserInfo(), loadCards()]);
+loadUserInfo()
+  .then(loadCards())
+  .catch(err => console.log(err))
 
 enableValidation();
 initSubscriptions();
-
-cardsSection.renderItems();

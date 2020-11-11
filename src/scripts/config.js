@@ -1,11 +1,13 @@
 export const cardConfig = {
   templateSelector: "#template-element",
+  cardSelector: ".element",
   titleSelector: ".element__title",
   imageSelector: ".element__image",
   deleteButtonSelector: ".element__delete",
   likeButtonSelector: ".element__like",
   cardsContainerSelector: ".elements",
   likeButtonModifier: "icon-button_type_like-active",
+  likeCountSelector: ".element__likecount"
 }
 
 export const formValidationConfig = {
