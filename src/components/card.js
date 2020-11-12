@@ -26,7 +26,7 @@ export default class Card {
     const likeCountElement = element.querySelector(this._cardConfig.likeCountSelector);
     const likesCount = likes.length;
     likeCountElement.textContent = likesCount > 0 ? likesCount : '';
-    if (likesCount > 0 && likes.some(x => x._id == this._userId)) {
+    if (likesCount > 0 && likes.some(x => x._id === this._userId)) {
       element.querySelector(this._cardConfig.likeButtonSelector).classList.add(this._cardConfig.likeButtonModifier);
       this.isLike = true;
     }

@@ -8,10 +8,6 @@ export default class PopupWithImage extends Popup {
     this._caption = this._popup.querySelector(".figure__caption");
   }
 
-  open() {
-    super.open();
-  }
-
   prepareContent({ name, link }) {
     this._image.src = link;
     this._image.alt = `Картинка '${name}'`;

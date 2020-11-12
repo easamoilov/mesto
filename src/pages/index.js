@@ -1,18 +1,18 @@
-import '../pages/index.css';
+import './index.css';
 
 import {
   cardConfig,
   formValidationConfig,
   apiConfig
-} from "./config.js";
+} from "../utils/config.js";
 
-import UserInfo from "./userInfo.js";
-import Section from "./section.js";
-import Card from "./card.js";
-import PopupWithImage from "./popup/popupWithImage.js";
-import PopupWithForm from './popup/popupWithForm';
-import FormValidator from "./validation.js";
-import Api from "./api.js";
+import UserInfo from "../components/userInfo.js";
+import Section from "../components/section.js";
+import Card from "../components/card.js";
+import PopupWithImage from "../components/popup/popupWithImage.js";
+import PopupWithForm from "../components/popup/popupWithForm.js";
+import FormValidator from "../components/validation.js";
+import Api from "../components/api.js";
 
 const api = new Api({
   baseUrl: apiConfig.baseUrl,
@@ -29,33 +29,45 @@ const userInfo = new UserInfo();
 const popupWithImage = new PopupWithImage(".js-card-details");
 
 const userFormPopup = new PopupWithForm(".js-user-info", ([name, about]) => {
-  return api.updateUserInfo({ name, about })
-    .then(data => userInfo.setUserInfo(data));
+  userFormPopup.renderLoading(true);
+  api.updateUserInfo({ name, about })
+    .then(data => userInfo.setUserInfo(data))
+    .then(() => userFormPopup.close())
+    .catch(err => console.log(err))
+    .finally(() => userFormPopup.renderLoading(false));
 });
 
 const cardFormPopup = new PopupWithForm(".js-card", ([name, link]) => {
-  return api.addCard({ name, link })
+  cardFormPopup.renderLoading(true);
+  api.addCard({ name, link })
     .then(data => {
       const cardElement = createCard(data);
       cardsSection.insertItem(cardElement);
+    })
+    .then(cardFormPopup.close())
+    .catch(err => console.log(err))
+    .finally(() => {
+      cardFormPopup.renderLoading(false);
     });
 });
 
 const deleteCardPopup = new PopupWithForm(".js-delete-card", () => {
   const cardId = deleteCardPopup.cardId;
-  return api.deleteCard(cardId)
-    .then(() => {
-      cardsSection.deleteById(Card.getIdSelector(cardId));
-    })
+  api.deleteCard(cardId)
+    .then(() => cardsSection.deleteById(Card.getIdSelector(cardId)))
+    .then(() => deleteCardPopup.close())
     .catch(err => console.log(err));
 });
 
 const editAvatarForm = new PopupWithForm(".js-avatar", ([avatarLink]) => {
-  return api.updateAvatar(avatarLink)
-    .then(() => {
-      userInfo.setAvatar(avatarLink);
-    })
-    .catch(err => console.log(err));
+  editAvatarForm.renderLoading(true);
+  api.updateAvatar(avatarLink)
+    .then(() => userInfo.setAvatar(avatarLink))
+    .then(() => editAvatarForm.close())
+    .catch(err => console.log(err))
+    .finally(() => {
+      editAvatarForm.renderLoading(true);
+    });
 });
 
 const createCard = (data) => {
@@ -73,8 +85,12 @@ const createCard = (data) => {
     deleteCardPopup.open();
   };
 
-  const cardElement = Card.createCardElement(data, userInfo.id, cardConfig, cardClick, cardLike, cardDelete);
-  return cardElement;
+  const userId = userInfo.id;
+
+  const card = new Card({ data, userId }, cardConfig);
+  card.setEventListeners(cardClick, cardLike, cardDelete);
+
+  return card.generateCard();
 }
 
 function initSubscriptions() {
@@ -137,7 +153,7 @@ function loadCards() {
 }
 
 loadUserInfo()
-  .then(loadCards())
+  .then(() => loadCards())
   .catch(err => console.log(err))
 
 enableValidation();
