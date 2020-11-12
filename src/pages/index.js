@@ -44,7 +44,7 @@ const cardFormPopup = new PopupWithForm(".js-card", ([name, link]) => {
       const cardElement = createCard(data);
       cardsSection.insertItem(cardElement);
     })
-    .then(cardFormPopup.close())
+    .then(() => cardFormPopup.close())
     .catch(err => console.log(err))
     .finally(() => {
       cardFormPopup.renderLoading(false);
